@@ -5,7 +5,8 @@ unit main;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
+  SortTypes;
 
 type
 
@@ -22,7 +23,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure PaintBoxPaint(Sender: TObject);
   private
-    FDataArray: array[0..999] of Integer;
+    FDataArray: TDataArray;
 
     procedure DrawArray;
   public
