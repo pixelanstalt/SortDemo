@@ -43,7 +43,7 @@ procedure TfrmMain.btnRandomizeClick(Sender: TObject);
 var
   intLoop: Integer;
 begin
-  for intLoop := 0 to 999 do
+  for intLoop := 0 to High(FDataArray) do
     FDataArray[intLoop] := Random(300);
 
   DrawArray;
@@ -54,7 +54,7 @@ var
   intLoop, intHigh: Integer;
   intTemp: Integer;
 begin
-  intHigh := 998;
+  intHigh := High(FDataArray)-1;
   while intHigh > 0 do
   begin
     for intLoop := 0 to intHigh do
@@ -77,7 +77,7 @@ procedure TfrmMain.btnStartInsertionSortClick(Sender: TObject);
 var
   intLoop, intInsert, intInnerLoop: Integer;
 begin
-  for intLoop := 1 to 999 do
+  for intLoop := 1 to High(FDataArray)-1 do
   begin
     intInsert := FDataArray[intLoop];
 
@@ -98,6 +98,7 @@ end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
+  SetLength(FDataArray, 1000);
   Randomize;
 end;
 
@@ -113,7 +114,7 @@ begin
   PaintBox.Canvas.Pen.Color := clBlack;
   PaintBox.Canvas.Rectangle(1, 1, 1004, 305);
   PaintBox.Canvas.Pen.Color := clBlue;
-  for intLoop := 0 to 999 do
+  for intLoop := 0 to High(FDataArray) do
   begin
     PaintBox.Canvas.Line(intLoop+2, 303, intLoop+2, 303-FDataArray[intLoop]);
   end;
