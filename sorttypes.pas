@@ -13,8 +13,7 @@ type
   TDataArraySize = Integer;
 
   TGetSortingAlgorithmName = function(): PChar;
-  TDoSort = procedure(DataArray: PDataArray; DataArraySize: TDataArraySize) of
-    object;
+  TDoSort = procedure(DataArray: PDataArray; DataArraySize: TDataArraySize);
 
 implementation
 
