@@ -12,8 +12,8 @@ type
   PDataArray = ^TDataArray;
   TDataArraySize = Integer;
 
-  TGetSortingAlgorithmName = function(): PChar;
-  TDoSort = procedure(DataArray: PDataArray; DataArraySize: TDataArraySize);
+  TGetSortingAlgorithmName = function(): PChar; stdcall;
+  TDoSort = procedure(DataArray: PDataArray; DataArraySize: TDataArraySize); stdcall;
 
 implementation
 
