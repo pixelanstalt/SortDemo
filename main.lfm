@@ -51,4 +51,13 @@ object frmMain: TfrmMain
     Style = csDropDownList
     TabOrder = 3
   end
+  object btnStartLibAlgorithm: TButton
+    Left = 628
+    Height = 25
+    Top = 68
+    Width = 75
+    Caption = 'Start'
+    OnClick = btnStartLibAlgorithmClick
+    TabOrder = 4
+  end
 end

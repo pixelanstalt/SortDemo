@@ -16,11 +16,13 @@ type
     btnRandomize: TButton;
     btnStartBubbleSort: TButton;
     btnStartInsertionSort: TButton;
+    btnStartLibAlgorithm: TButton;
     cbSortingAlgorithms: TComboBox;
     PaintBox: TPaintBox;
     procedure btnRandomizeClick(Sender: TObject);
     procedure btnStartBubbleSortClick(Sender: TObject);
     procedure btnStartInsertionSortClick(Sender: TObject);
+    procedure btnStartLibAlgorithmClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure PaintBoxPaint(Sender: TObject);
   private
@@ -99,6 +101,28 @@ begin
     PaintBox.Update;
   end;
   PaintBox.Update;
+end;
+
+procedure TfrmMain.btnStartLibAlgorithmClick(Sender: TObject);
+var
+  LibHandle: TLibHandle = NilHandle;
+  DoSort: TDoSort = nil;
+begin
+  if cbSortingAlgorithms.ItemIndex > -1 then
+  begin
+    LibHandle := LoadLibrary(
+      FSortingAlgorithmFilenames[cbSortingAlgorithms.ItemIndex]);
+    if LibHandle <> NilHandle then
+    begin
+      Pointer(DoSort) := GetProcAddress(LibHandle, 'DoSort');
+      if @DoSort <> nil then
+        DoSort(@FDataArray, Length(FDataArray));
+      UnloadLibrary(LibHandle);
+    end;
+    PaintBox.Update;
+  end
+  else
+    MessageDlg('No algorithm selected', mtError, [mbOk], 0);
 end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
