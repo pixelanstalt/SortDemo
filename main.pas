@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-  SortTypes;
+  SortTypes, DynLibs, LazFileUtils;
 
 type
 
@@ -16,6 +16,7 @@ type
     btnRandomize: TButton;
     btnStartBubbleSort: TButton;
     btnStartInsertionSort: TButton;
+    cbSortingAlgorithms: TComboBox;
     PaintBox: TPaintBox;
     procedure btnRandomizeClick(Sender: TObject);
     procedure btnStartBubbleSortClick(Sender: TObject);
@@ -24,8 +25,12 @@ type
     procedure PaintBoxPaint(Sender: TObject);
   private
     FDataArray: TDataArray;
+    FSortingAlgorithmFilenames: array of String;
 
     procedure DrawArray;
+    procedure EnumerateAlgorithmsFromSharedLibraries;
+    function GetSortingAlgorithmName(Filename: String;
+      var AlgorithmName: String): Boolean;
   public
 
   end;
@@ -100,6 +105,7 @@ procedure TfrmMain.FormCreate(Sender: TObject);
 begin
   SetLength(FDataArray, 1000);
   Randomize;
+  EnumerateAlgorithmsFromSharedLibraries;
 end;
 
 procedure TfrmMain.PaintBoxPaint(Sender: TObject);
@@ -117,6 +123,49 @@ begin
   for intLoop := 0 to High(FDataArray) do
   begin
     PaintBox.Canvas.Line(intLoop+2, 303, intLoop+2, 303-FDataArray[intLoop]);
+  end;
+end;
+
+procedure TfrmMain.EnumerateAlgorithmsFromSharedLibraries;
+var
+  SR: TSearchRec;
+  AlgorithmName: String;
+begin
+  if FindFirstUTF8('algorithms/*.' + SharedSuffix, faAnyFile, SR) = 0 then
+  repeat
+    if (SR.Name = '.') or (SR.Name = '..') then
+      Continue;
+
+    if GetSortingAlgorithmName('algorithms/' + SR.Name, AlgorithmName) then
+    begin
+      SetLength(FSortingAlgorithmFilenames,
+        Length(FSortingAlgorithmFilenames)+1);
+      FSortingAlgorithmFilenames[High(FSortingAlgorithmFilenames)] :=
+        'algorithms/' + SR.Name;
+      cbSortingAlgorithms.Items.Add(AlgorithmName);
+    end;
+  until FindNextUTF8(SR) <> 0;
+  FindClose(SR);
+end;
+
+function TfrmMain.GetSortingAlgorithmName(Filename: String;
+  var AlgorithmName: String): Boolean;
+var
+  LibHandle: TLibHandle = NilHandle;
+  GetAlgorithmName: TGetSortingAlgorithmName = nil;
+begin
+  Result := False;
+  LibHandle := LoadLibrary(Filename);
+  if LibHandle <> NilHandle then
+  begin
+    Pointer(GetAlgorithmName) := GetProcAddress(LibHandle,
+      'GetSortingAlgorithmName');
+    if @GetAlgorithmName <> nil then
+    begin
+      AlgorithmName := GetAlgorithmName();
+      Result := True;
+    end;
+    UnloadLibrary(LibHandle);
   end;
 end;
 

@@ -42,4 +42,13 @@ object frmMain: TfrmMain
     OnClick = btnStartInsertionSortClick
     TabOrder = 2
   end
+  object cbSortingAlgorithms: TComboBox
+    Left = 424
+    Height = 30
+    Top = 65
+    Width = 196
+    ItemHeight = 0
+    Style = csDropDownList
+    TabOrder = 3
+  end
 end
