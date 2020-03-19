@@ -3,6 +3,7 @@ object frmMain: TfrmMain
   Height = 417
   Top = 151
   Width = 1020
+  ActiveControl = btnRandomize
   Caption = 'Sort Demo'
   ClientHeight = 417
   ClientWidth = 1020
@@ -24,15 +25,6 @@ object frmMain: TfrmMain
     OnClick = btnRandomizeClick
     TabOrder = 0
   end
-  object btnStartBubbleSort: TButton
-    Left = 8
-    Height = 25
-    Top = 40
-    Width = 187
-    Caption = 'Start Bubblesort'
-    OnClick = btnStartBubbleSortClick
-    TabOrder = 1
-  end
   object btnStartInsertionSort: TButton
     Left = 8
     Height = 25
@@ -40,7 +32,7 @@ object frmMain: TfrmMain
     Width = 187
     Caption = 'Start Insertionsort'
     OnClick = btnStartInsertionSortClick
-    TabOrder = 2
+    TabOrder = 1
   end
   object cbSortingAlgorithms: TComboBox
     Left = 424
@@ -49,7 +41,7 @@ object frmMain: TfrmMain
     Width = 196
     ItemHeight = 0
     Style = csDropDownList
-    TabOrder = 3
+    TabOrder = 2
   end
   object btnStartLibAlgorithm: TButton
     Left = 628
@@ -58,6 +50,6 @@ object frmMain: TfrmMain
     Width = 75
     Caption = 'Start'
     OnClick = btnStartLibAlgorithmClick
-    TabOrder = 4
+    TabOrder = 3
   end
 end
