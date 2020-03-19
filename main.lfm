@@ -25,15 +25,6 @@ object frmMain: TfrmMain
     OnClick = btnRandomizeClick
     TabOrder = 0
   end
-  object btnStartInsertionSort: TButton
-    Left = 8
-    Height = 25
-    Top = 68
-    Width = 187
-    Caption = 'Start Insertionsort'
-    OnClick = btnStartInsertionSortClick
-    TabOrder = 1
-  end
   object cbSortingAlgorithms: TComboBox
     Left = 424
     Height = 30
@@ -41,7 +32,7 @@ object frmMain: TfrmMain
     Width = 196
     ItemHeight = 0
     Style = csDropDownList
-    TabOrder = 2
+    TabOrder = 1
   end
   object btnStartLibAlgorithm: TButton
     Left = 628
@@ -50,6 +41,6 @@ object frmMain: TfrmMain
     Width = 75
     Caption = 'Start'
     OnClick = btnStartLibAlgorithmClick
-    TabOrder = 3
+    TabOrder = 2
   end
 end

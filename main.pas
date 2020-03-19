@@ -14,12 +14,10 @@ type
 
   TfrmMain = class(TForm)
     btnRandomize: TButton;
-    btnStartInsertionSort: TButton;
     btnStartLibAlgorithm: TButton;
     cbSortingAlgorithms: TComboBox;
     PaintBox: TPaintBox;
     procedure btnRandomizeClick(Sender: TObject);
-    procedure btnStartInsertionSortClick(Sender: TObject);
     procedure btnStartLibAlgorithmClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure PaintBoxPaint(Sender: TObject);
@@ -52,29 +50,6 @@ begin
     FDataArray[intLoop] := Random(300);
 
   DrawArray;
-end;
-
-procedure TfrmMain.btnStartInsertionSortClick(Sender: TObject);
-var
-  intLoop, intInsert, intInnerLoop: Integer;
-begin
-  for intLoop := 1 to High(FDataArray)-1 do
-  begin
-    intInsert := FDataArray[intLoop];
-
-    intInnerLoop := intLoop;
-
-    while (intInnerLoop > 0) and (FDataArray[intInnerLoop-1] > intInsert) do
-    begin
-      FDataArray[intInnerLoop] := FDataArray[intInnerLoop-1];
-      Dec(intInnerLoop);
-    end;
-
-    FDataArray[intInnerLoop] := intInsert;
-
-    PaintBox.Update;
-  end;
-  PaintBox.Update;
 end;
 
 procedure TfrmMain.btnStartLibAlgorithmClick(Sender: TObject);
