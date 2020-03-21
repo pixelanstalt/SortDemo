@@ -14,7 +14,7 @@ procedure DoSort(DataArray: PDataArray; Size: TDataArraySize); stdcall;
 var
   intLoop, intInsert, intInnerLoop: Integer;
 begin
-  for intLoop := 1 to Size-2 do
+  for intLoop := 1 to Size-1 do
   begin
     intInsert := DataArray^[intLoop];
 
