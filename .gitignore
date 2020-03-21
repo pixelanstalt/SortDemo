@@ -1,4 +1,6 @@
 lib/
 SortDemo
+algorithms/test/SharedLibraryTest
 *.lps
 *.so
+*.ini
